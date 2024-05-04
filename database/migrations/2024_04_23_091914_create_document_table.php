@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('document', function (Blueprint $table) {
             $table->id('Document_ID');
-            $table->string('Subeject', 50);
+            $table->string('Subject', 50);
             $table->string('Title', 15);
             $table->date('DateCreated');
             $table->unsignedBigInteger('User_ID');

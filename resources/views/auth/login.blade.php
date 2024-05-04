@@ -27,5 +27,16 @@
         
         
     </form>
+    @if ($errors->any())
+    <div id="errorMessage" class="alert alert-danger">
+        {{ $errors->first() }}
+    </div>
+    <script>
+        //hide error message after 3 seconds
+        setTimeout(function () {
+            document.getElementById('errorMessage').style.display = 'none';
+        }, 3000);
+    </script>
+    @endif
 </body>
 </html>

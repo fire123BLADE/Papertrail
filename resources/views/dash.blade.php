@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ url('Submit.php') }}">
+                <a href="{{ route('submitDocument') }}">
                     <img src="{{ asset('storage/photos/sent.svg') }}" alt="sent-icon" class="icon">
                     <span class="nav-item">Submit</span>
                 </a>
@@ -49,13 +49,13 @@
             </li>
         
         </ul>
-        <a href="{{ url('Login.php') }}" class="Out">
+        <a href="{{ route('login') }}" class="Out">
                     <img src="{{ asset('storage/photos/logout.png') }}" alt="logout-icon" class="icon">
                     <span class="nav-item">Log Out</span>
                 </a>
     </nav>
     <h2>Dashboard</h2>
-    <div id="Link-Dashboard" class="content">
+    <div id="Link-Dashboard" class="content" >
         <div class="dashboard">
             <h1>Welcome to PaperTrail<br></h1>
             <p>PaperTrail is your comprehensive document tracker. It's designed to help you manage, sent and monitor all your important documents efficiently.</p>

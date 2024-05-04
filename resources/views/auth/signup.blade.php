@@ -46,5 +46,6 @@
         </form>
         <button><a href="{{ route('login') }}">Login</a></button>
     </div>
+    
 </body>
 </html>

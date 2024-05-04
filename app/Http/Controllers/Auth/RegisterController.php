@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -25,20 +26,21 @@ class RegisterController extends Controller
             'department' => 'required|string',
         ]);
 
-        // Create a new User instance
+        // create a new user instance
         $user = new User();
+        $user->username = $request->input('username');
+        $user->password = bcrypt($request->input('password'));
         $user->firstname = $request->input('FirstName');
         $user->lastname = $request->input('LastName');
         $user->email = $request->input('email');
-        $user->username = $request->input('username');
-        $user->password = bcrypt($request->input('password'));
         $user->department = $request->input('department');
         
+        
     
-        // Save the user record to the database
+        // Save the user record to the db
         $user->save();
 
-        // Redirect to the login page with a success message
+        //back to login page with a success message
         return redirect()->route('login')->with('success', 'Registration successful! Please login.');
     }
 }
