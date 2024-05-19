@@ -1,18 +1,16 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Document; // Import the Document model
 
 class SubmitDocumentController extends Controller
 {
-
-
     public function showSubmitForm()
     {
-        return view('submit_document');
-        
+        return view('submit-document');
     }
 
     public function submit(Request $request)
@@ -29,6 +27,17 @@ class SubmitDocumentController extends Controller
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
         $file->storeAs('documents', $fileName); // Store in storage/app/documents folder
+
+        $userId = Auth::id(); // Get the ID of the authenticated user
+
+        // Save document details into the database
+        $document = new Document();
+        $document->Subject = $validatedData['document_description'];
+        $document->DocumentType = $validatedData['department'];
+        $document->Date = now(); // Current date
+        $document->RecipientEmail = $validatedData['recipient_email'];
+        $document->UserID = $userId; // Assign the user ID
+        $document->save();
 
         // Send the email
         $recipientEmail = $validatedData['recipient_email'];

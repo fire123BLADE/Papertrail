@@ -2,6 +2,7 @@
 use Illuminate\LoginController;
 use App\Http\Controllers\SubmitDocumentController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RecordsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ Route::middleware('web')->group(function () {
 Route::get('/submit-document', function () {
     return view('submit-document');
 });
+Route::get('/protected-route', 'YourController@yourMethod')->middleware('auth');
 
 
 Route::get('/Login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -35,3 +37,4 @@ Route::get('/signup', 'Auth\RegisterController@showRegistrationForm')->name('sig
 Route::post('/signup', 'Auth\RegisterController@register')->name('signup')->middleware('web');
 Route::post('/submit-document', 'SubmitDocumentController@showSubmitForm')->name('submitDocument');
 Route::post('/submit-document', [SubmitDocumentController::class, 'submit'])->name('submitDocument');
+Route::get('/records', [RecordsController::class, 'showRecords'])->name('records.index');

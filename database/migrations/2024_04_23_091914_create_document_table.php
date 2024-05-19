@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('document', function (Blueprint $table) {
             $table->id('Document_ID');
             $table->string('Subject', 50);
-            $table->string('Title', 15);
+            $table->string('DocumentType', 20);
             $table->date('DateCreated');
             $table->unsignedBigInteger('User_ID');
-
-            $table->foreign('UserID')->references('UserID')->on('sender')->onUpdate('cascade');
+            
+            //$table->foreign('UserID')->references('UserID')->on('sender')->onUpdate('cascade');
         });
     }
 
