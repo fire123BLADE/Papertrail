@@ -17,7 +17,7 @@ class Document extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'User_ID', 'UserID');
+        return $this->belongsTo(User::class, 'UserID', 'UserID');
     }
     
 }

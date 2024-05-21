@@ -3,7 +3,7 @@
 <head>
     <link rel="shortcut icon" type="x-icon" href="Web Logo.png">
     <title>Records</title>
-    <link rel="stylesheet" href="{{ asset('css/records.css') }}"> <!-- Reference the CSS file -->
+    <link rel="stylesheet" href="{{ asset('/storage/css/records.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -31,9 +31,7 @@
                     <td>{{ $record->Subject }}</td>
                     <td>{{ $record->RecipientEmail }}</td>
                     <td>{{ $record->Date }}</td>
-                    <td>
-                        <div class="status-badge status-green">{{ $record->status }}</div>
-                    </td>
+                  
                     <td><button class="btn btn-primary action-button">View</button></td>
                 </tr>
                 @endforeach

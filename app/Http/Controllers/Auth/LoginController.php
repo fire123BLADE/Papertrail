@@ -16,14 +16,16 @@ class LoginController extends Controller
     }
 
     public function login(Request $request)
-{
-    
-     $user = User::where('username','=',$request->username)->first();
-        if($user && Hash::check($request->password, $user->Password)){
-            return redirect()->intended('/dashboard');  
-        }else{
-            return back()->withErrors(['error' => 'Invalid credentials']);}
+    {
+        $user = User::where('username', '=', $request->username)->first();
+        
+        if ($user && Hash::check($request->password, $user->Password)) {
+            // Store the user's ID in the session
+            $request->session()->put('user_id', $user->UserID);
 
-  
-}
+            return redirect()->intended('/dashboard');
+        } else {
+            return back()->withErrors(['error' => 'Invalid credentials']);
+        }
+    }
 }

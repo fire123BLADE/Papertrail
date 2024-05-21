@@ -28,15 +28,16 @@ class SubmitDocumentController extends Controller
         $fileName = $file->getClientOriginalName();
         $file->storeAs('documents', $fileName); // Store in storage/app/documents folder
 
-        $userId = Auth::id(); // Get the ID of the authenticated user
-
+        //$userId = Auth::id(); // Get the ID of the authenticated user
+        $userID = session('user_id');
+        
         // Save document details into the database
         $document = new Document();
         $document->Subject = $validatedData['document_description'];
         $document->DocumentType = $validatedData['department'];
         $document->Date = now(); // Current date
         $document->RecipientEmail = $validatedData['recipient_email'];
-        $document->UserID = $userId; // Assign the user ID
+        $document->UserID = $userID; // Assign the user ID
         $document->save();
 
         // Send the email
