@@ -19,7 +19,8 @@ Route::middleware('web')->group(function () {
     Route::middleware('web')->group(function () {
         Route::get('/submit-document', [SubmitDocumentController::class, 'showSubmitForm'])->name('submitDocument');
         Route::post('/submit-document', [SubmitDocumentController::class, 'submit'])->name('submitDocument');
-        Route::get('/records', [RecordsController::class, 'showRecords'])->name('records.index');
+        Route::get('/records', [RecordsController::class, 'showRecords'])->name('records');
+
     });
 });
 

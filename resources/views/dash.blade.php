@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('records.index') }}">
+                <a href="{{ asset('records') }}">
                     <img src="{{ asset('storage/photos/history.svg') }}" alt="history-icon" class="icon">
                     <span class="nav-item">Records</span>
                 </a>

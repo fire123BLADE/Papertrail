@@ -78,7 +78,7 @@
             @csrf
             <div class="form-group">
                 <label for="recipient_email">To:</label>
-                <input type="email" id="recipient_email" name="recipient_email" class="form-control" placeholder="Recipient's email">
+                <textarea id="recipient_email" name="recipient_email" class="form-control" placeholder="Recipient's email (comma-separated)"></textarea>
             </div>
             <div class="form-group">
                 <label for="document_description">Subject:</label>
