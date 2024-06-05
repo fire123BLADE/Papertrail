@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\Document;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+
 
 class SubmitDocumentController extends Controller
 {
@@ -41,8 +43,8 @@ class SubmitDocumentController extends Controller
         // Store the uploaded file
         $file = $request->file('file');
         $fileName = $file->getClientOriginalName();
-        $filePath = $file->storeAs('documents', $fileName); // Store in storage/app/documents folder
-
+        $filePath = $file->storeAs('public/documents', $fileName); // Store in public/documents folder
+        $filePath = Storage::url($filePath);
         // Get the ID of the authenticated user
         $userID = session('user_id') ?? Auth::id();
 
@@ -53,9 +55,10 @@ class SubmitDocumentController extends Controller
             $document = new Document();
             $document->Subject = $validatedData['document_description'];
             $document->DocumentType = $validatedData['department'];
-            $document->Date = now(); // Current date
+            $document->Date = now();
             $document->RecipientEmail = $recipientEmail;
-            $document->UserID = $userID; // Assign the user ID
+            $document->UserID = $userID; 
+            $document->FileName = $fileName;
             $document->save();
 
             // Send the email

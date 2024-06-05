@@ -12,7 +12,7 @@ class Document extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Subject', 'DocumentType','Title', 'DateCreated', 'UserID',
+        'Subject', 'DocumentType','Title', 'DateCreated', 'UserID', 'Status', 'RecipientEmail', 'FileName'
     ];
 
     public function user()

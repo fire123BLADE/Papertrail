@@ -20,7 +20,9 @@ Route::middleware('web')->group(function () {
         Route::get('/submit-document', [SubmitDocumentController::class, 'showSubmitForm'])->name('submitDocument');
         Route::post('/submit-document', [SubmitDocumentController::class, 'submit'])->name('submitDocument');
         Route::get('/records', [RecordsController::class, 'showRecords'])->name('records');
+        Route::get('/document/{filename}', [RecordsController::class, 'view'])->name('documents.view');
 
+        
     });
 });
 
@@ -29,3 +31,7 @@ Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 Route::get('/signup', 'Auth\RegisterController@showRegistrationForm')->name('signup');
 Route::post('/signup', 'Auth\RegisterController@register')->name('signup');
+
+//Document Status Update
+Route::post('/documents/{document}/status', [RecordsController::class, 'updateStatus'])->name('documents.updateStatus');
+
