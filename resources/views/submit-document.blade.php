@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
     body {
-      background-color: #41b3a3;
+      background-color: #f0f2f5;
       background-image: url('submit1.svg');
       background-size: cover;
       background-repeat: no-repeat;
@@ -19,8 +19,8 @@
       margin: 50px auto;
       padding: 20px 30px;
       border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-      background-color: #EBD9B4;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0);
+      background-color: #dee2e6;
     }
 
     .form-group {
@@ -102,8 +102,7 @@
                     <option value="Leave">File Leave</option>
                 </select>
             </div>
-         
-
+        
             <input type="submit" class="btn btn-primary" value="Submit">
         </form>
     </div>

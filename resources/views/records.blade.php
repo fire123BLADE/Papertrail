@@ -33,7 +33,7 @@
 <div class="container">
     <h2>Records</h2>
     <div class="d-flex justify-content-between mb-3">
-        <a href="{{('/dashboard') }}" class="btn btn-secondary">Back</a>
+        <button onclick= history.back() class="btn btn-secondary">Back</a>
         <div></div>
     </div>
     <form id="sort_form" method="GET" action="{{ route('records') }}" class="form-inline mb-3">

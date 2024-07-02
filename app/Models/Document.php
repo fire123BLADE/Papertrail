@@ -12,7 +12,10 @@ class Document extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Subject', 'DocumentType','Title', 'DateCreated', 'UserID', 'Status', 'RecipientEmail', 'FileName'
+        'Subject', 'DocumentType','Title', 'Date', 'UserID', 'Status', 'RecipientEmail', 'FileName'
+    ];
+    protected $casts = [
+        'Date' => 'datetime', // Assuming 'date' is your actual date field
     ];
 
     public function user()

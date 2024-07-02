@@ -14,19 +14,18 @@
         <div class="card-body">
             <p><strong>Document ID:</strong> {{ $document->Document_ID }}</p>
             <p><strong>Subject:</strong> {{ $document->Subject }}</p>
-            <p><strong>Recipient Email:</strong> {{ $document->RecipientEmail }}</p>
             <p><strong>Date:</strong> {{ $document->Date }}</p>
             <p><strong>Document File: </strong>{{ $document->FileName }}</p>
             <div id="iframe-container">
                 <iframe id="document-iframe" src="{{ $fileUrl }}" style="border: none; width: 100%; height: 600px;"></iframe>
             </div>
-            <div class="mt-3">
+            <!--<div class="mt-3">
                 <button class="btn btn-success" onclick="handleApprove({{ $document->Document_ID }})">Approve</button>
                 <button class="btn btn-danger" onclick="handleDisapprove({{ $document->Document_ID }})">Disapprove</button>
-            </div>
+            </div>-->
         </div>
     </div>
-    <a href="{{ route('records') }}" class="btn btn-secondary mt-3">Back to Records</a>
+    <button onclick= history.back() class="btn btn-secondary mt-3">Back</a>
 </div>
 <script>
      function handleApprove(documentId) {

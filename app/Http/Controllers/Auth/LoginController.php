@@ -18,7 +18,11 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $user = User::where('username', '=', $request->username)->first();
-        
+        // Check if the credentials are for the admin
+            if ($request->username === 'admin' && $request->password === 'admin') {
+                // Redirect to admin dashboard
+                return redirect()->intended('/admindashboard');
+            }
         if ($user && Hash::check($request->password, $user->Password)) {
             // Store the user's ID in the session
             $request->session()->put('user_id', $user->UserID);
@@ -27,5 +31,8 @@ class LoginController extends Controller
         } else {
             return back()->withErrors(['error' => 'Invalid credentials']);
         }
+            
+
+        
     }
 }

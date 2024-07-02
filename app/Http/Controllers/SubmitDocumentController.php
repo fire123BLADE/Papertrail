@@ -8,7 +8,7 @@ use App\Models\Document;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\URL;
 
 class SubmitDocumentController extends Controller
 {
@@ -45,8 +45,9 @@ class SubmitDocumentController extends Controller
         $fileName = $file->getClientOriginalName();
         $filePath = $file->storeAs('public/documents', $fileName); // Store in public/documents folder
         $filePath = Storage::url($filePath);
+
         // Get the ID of the authenticated user
-        $userID = session('user_id') ?? Auth::id();
+        $userID = session('user_id') ?? auth()->id();
 
         foreach ($recipientEmails as $recipientEmail) {
             Log::info('Processing email for recipient: ' . $recipientEmail);
@@ -61,15 +62,25 @@ class SubmitDocumentController extends Controller
             $document->FileName = $fileName;
             $document->save();
 
+            // Generate approval and disapproval links
+            $approvalLink = route('documents.approve', ['subject' => $document->Subject, 'email' => $recipientEmail]);
+            $disapprovalLink = route('documents.disapprove', ['subject' => $document->Subject, 'email' => $recipientEmail]);
+
+
             // Send the email
             $subject = $validatedData['document_description'];
             $messageBody = $request->input('message_body', '');
 
             try {
-                Mail::raw($messageBody, function ($message) use ($recipientEmail, $subject, $filePath) {
+                Mail::send('emails.document_approval', [
+                    'document' => $document,
+                    'approvalLink' => $approvalLink,
+                    'disapprovalLink' => $disapprovalLink,
+                    'messageBody' => $messageBody
+                ], function ($message) use ($recipientEmail, $subject, $filePath) {
                     $message->to($recipientEmail)
                             ->subject($subject)
-                            ->attach(storage_path('app/' . $filePath));
+                            ->attach(public_path($filePath));
                 });
                 Log::info('Email sent to: ' . $recipientEmail);
             } catch (\Exception $e) {
