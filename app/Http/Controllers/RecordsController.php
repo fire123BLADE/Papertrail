@@ -167,4 +167,23 @@ class RecordsController extends Controller
     ]);
     }
 
+    public function adminDashboard()
+{
+    $recentDocuments = Document::orderBy('Date', 'desc')->take(3)->get();
+
+    // Other data you may want to pass to the view
+    $totalDocuments = Document::count();
+    $pendingDocuments = Document::where('status', null)->count(); // Assuming pending is NULL
+    $approvedDocuments = Document::where('status', 'approved')->count();
+    $archivedDocuments = Archive::count(); // Count of archived documents
+
+    return view('admindash', [
+        'recentDocuments' => $recentDocuments,
+        'totalDocuments' => $totalDocuments,
+        'pendingDocuments' => $pendingDocuments,
+        'approvedDocuments' => $approvedDocuments,
+        'archivedDocuments' => $archivedDocuments,
+    ]);
+}
+
 }

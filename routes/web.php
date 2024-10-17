@@ -32,6 +32,7 @@ Route::middleware('web')->group(function () {
         Route::get('/archive', [RecordsController::class, 'showArchive'])->name('archive');
         Route::get('/submit-announcement', [AnnouncementController::class, 'showSubmitForm'])->name('submitAnnouncement');
         Route::post('/submit-announcement', [AnnouncementController::class, 'submit'])->name('submitAnnouncement');
+        Route::get('/admindashboard', [RecordsController::class, 'adminDashboard'])->name('admindashboard');
 
 
 
